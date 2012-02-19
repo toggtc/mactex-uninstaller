@@ -161,7 +161,7 @@ if [ ! -z "`echo ${PKGS} | grep ${MACTEX_TEXLIVE}`" ]; then
         remove_item "${VOLUME}etc/paths.d/TeX"
         remove_item "${VOLUME}etc/manpaths.d/TeX"
         remove_item "${VOLUME}Library/TeX"
-        remove_item "${VOLUME}TeXDistPrefPane.prefPane"
+        remove_item "${VOLUME}Library/PreferencePanes/TeXDistPrefPane.prefPane"
     fi
 
     forget ${MACTEX_TEXLIVE}

@@ -1,5 +1,10 @@
-Uninstaller for MacTex 2011
+MacTeX 2011 Uninstaller
 ==================
+
+Download
+------------------
+`curl -kLO https://raw.github.com/toggtc/mactex-uninstaller/master/UninstallMacTex.command`
+
 Usage
 ------------------
 `sudo ./UninstallMacTex.command`
