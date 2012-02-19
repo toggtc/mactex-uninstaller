@@ -57,19 +57,27 @@ remove_dir_if_empty()
 {
     _DEBUG "remove_dir_if_empty) called, ${1}"
     [ $# -eq 0 ] && return 1
-    
-    if [ -d "${1}" ] && [ -z "$(ls -A ${1})" ]; then
-        if [ ${IS_REMOVE_OFF} -eq 1 ];then
-            echo "sudo rm -rf ${1}"
+    [ ! -d "${1}" ] && return 1
+    is_empty=1
+    for f in `find ${1} | sort -r`; do
+        if [ -d "${f}" ] && [ -z "$(ls -A ${f})" ]; then
+            if [ ${IS_REMOVE_OFF} -eq 1 ];then
+                echo "sudo rm -rf ${f}"
+            else
+                sudo rm -rf ${f}
+            fi
         else
-            sudo rm -rf ${1}
+            _DEBUG "${f} is not empty."
+            is_empty=0
         fi
+    done
+
+    if [ ${is_empty} -eq 1 ]; then
+        return 0
     else
-        _DEBUG "${1} is not empty."
-        return 2
+        return 1
     fi
 }
-
 # Do `sudo pkgutil --forget`
 # $1 package-id
 forget()
